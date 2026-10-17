@@ -1,4 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+using NetCoreLA7.Models;
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("QlsanphamContext") ?? throw new InvalidOperationException("Connection string 'QlsanphamContext' not found.");
+
+builder.Services.AddDbContext<QlsanphamContext>(options => options.UseSqlServer(connectionString));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
